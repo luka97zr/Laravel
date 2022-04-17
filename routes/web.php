@@ -23,29 +23,15 @@ use Illuminate\Support\Facades\File;
 */
 
 Route::get('/', function () {
-    // return view('posts',[
-    //     'posts' => Post::all()
-    // ]);
-    $files = File::files(resource_path("posts"));
-    
-    foreach($files as $file) {
-        $document =  YamlFrontMatter::parseFile($file);
-       $posts[] = new Post(
-           $document->title,
-           $document->excerpt,
-           $document->date,
-           $document->body(),
-       );
-    }
-    dd($posts);
+    return view('posts',[
+        'posts' => Post::all()
+    ]);
 });
 
 Route::get('post/{post}', function ($slug) {
 
-    $post = Post::find($slug);
-
     return view('post',[
-        'post' => $post
+        'post' => Post::find($slug)
     ]);
 
 })->where('post','[A-z_\-]+');
