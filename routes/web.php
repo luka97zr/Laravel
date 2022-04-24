@@ -2,6 +2,7 @@
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use League\CommonMark\Extension\FrontMatter\Data\LibYamlFrontMatterParser;
 use League\CommonMark\Extension\FrontMatter\Data\SymfonyYamlFrontMatterParser;
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\File;
 
 Route::get('/', function () {
     return view('posts',[
-        'posts' => Post::all()
+         'posts' => Post::latest()->with('category','author')->get()
     ]);
 });
 
@@ -36,8 +37,14 @@ Route::get('post/{post:slug}', function (Post $post) {
 
 })->where('post','[A-z_\-]+');
 
-Route::get('categories/{category}',function(Category $category){
+Route::get('categories/{category:slug}',function(Category $category){
     return view('posts',[
-        'posts' => $category->posts
+        'posts' => $category->posts->load(['category','author']) //Kada radimo na postojecem modelu
+    ]);
+});
+
+Route::get('authors/{author:username}',function(User $author){
+    return view('posts',[
+        'posts' => $author->posts->load(['category','author']) //Kada radimo na postojecem modelu
     ]);
 });
