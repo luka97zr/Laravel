@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
@@ -24,19 +25,9 @@ use Illuminate\Support\Facades\File;
 |
 */
 
-Route::get('/', function () {
-    return view('posts',[
-         'posts' => Post::latest()->with('category','author')->get(),
-         'categories'  => Category::all()
-    ]);
-})->name('home');
+Route::get('/', [PostController::class, 'index'])->name('home');
 
-Route::get('post/{post:slug}', function (Post $post) {
-    return view('post',[
-        'post' => $post,
-    ]);
-
-})->where('post','[A-z_\-]+');
+Route::get('post/{post:slug}', [PostController::class, 'show']);
 
 Route::get('categories/{category:slug}',function(Category $category){
     return view('posts',[
