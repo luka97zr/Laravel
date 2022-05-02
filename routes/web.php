@@ -29,13 +29,13 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('post/{post:slug}', [PostController::class, 'show']);
 
-Route::get('categories/{category:slug}',function(Category $category){
-    return view('posts',[
-        'posts' => $category->posts->load(['category','author']), //Kada radimo na postojecem modelu
-        'categories'  => Category::all(),
-        'currentCategory' => $category
-    ]);
-})->name('category');
+// Route::get('categories/{category:slug}',function(Category $category){
+//     return view('posts',[
+//         'posts' => $category->posts->load(['category','author']), //Kada radimo na postojecem modelu
+//         'categories'  => Category::all(),
+//         'currentCategory' => $category
+//     ]);
+// })->name('category');
 
 Route::get('authors/{author:username}',function(User $author){
     return view('posts',[
