@@ -6,7 +6,7 @@
                 <h1>
                     <a href="/post/{{ $post->slug}}">{{$post -> title}}</a>
 </h1>
-<p>By <a href="/authors/{{$post->author->username}}">{{$post->author->username}}</a> in <a href="#">{{$post->category->name}}</a></p>
+<p>By <a href="/?author={{$post->author->username}}">{{$post->author->username}}</a> in <a href="#">{{$post->category->name}}</a></p>
 {!! $post -> body !!}
 </article>
 @endforeach
