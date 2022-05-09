@@ -42,6 +42,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getUsernameAttribute($username) {
+        return ucwords($username); // Svaki put kada pozovemo $jane->username vratice nam sa velikim pcoetnim slovom(aksesor)
+    }
+
+    public function setPasswordAttribute($password) {
+        $this->attributes['password'] = bcrypt($password); //Svaki pwd atribut koji je poslat u User::create() dobija tu vrednost(mutator)
+    }
+
     public function posts() {
         return $this->hasMany(Post::class);
     }
