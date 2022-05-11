@@ -11,6 +11,10 @@ class Post extends Model
     // protected $guarded = [];
     protected $fillable = ['title', 'excerpt', 'body', 'slug', 'category_id'];
 
+    public function comments() {
+        return $this->hasMany(Comments::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
