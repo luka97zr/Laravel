@@ -9,6 +9,8 @@ class Comments extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function post() // ime metode je bitno jer ce traziti tabelu post_id
     {
         return $this->belongsTo(Post::class);

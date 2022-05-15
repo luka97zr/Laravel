@@ -9,13 +9,13 @@ use App\Models\Post;
 class PostController extends Controller
 {
     public function index() {
-        return view('posts',[
+        return view('posts.posts',[
             'posts' => Post::latest()->filter(request(['search','category','author']))->paginate(6)->withQueryString(),
         ]);
     }
 
     public function show(Post $post) {
-        return view('post',[
+        return view('posts.post',[
             'post' => $post,
         ]);
     }
