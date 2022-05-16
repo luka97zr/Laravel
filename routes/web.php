@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
@@ -16,7 +17,7 @@ use Symfony\Component\Routing\Loader\YamlFileLoader;
 use Symfony\Component\Translation\Dumper\YamlFileDumper;
 use Symfony\Component\VarDumper\VarDumper;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Validation\ValidationException;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,8 @@ use Illuminate\Support\Facades\File;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post('newsletter',NewsletterController::class);
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
