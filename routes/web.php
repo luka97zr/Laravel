@@ -36,6 +36,8 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('post/{post:slug}', [PostController::class, 'show']);
 
+Route::get('admin/posts/create',[PostController::class,'create'])->middleware('admin');
+
 // Route::get('categories/{category:slug}',function(Category $category){
 //     return view('posts',[
 //         'posts' => $category->posts->load(['category','author']), //Kada radimo na postojecem modelu
@@ -54,4 +56,3 @@ Route::post('login',[SessionsController::class,'store'])->middleware('guest');
 Route::post('logout',[SessionsController::class,'destroy'])->middleware('auth'); //Samo autentifikovan(logovan) moze da pristupi
 
 Route::get('forgot-password',[PasswordResetController::class,'create']);
-
