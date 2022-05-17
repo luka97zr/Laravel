@@ -37,6 +37,7 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('post/{post:slug}', [PostController::class, 'show']);
 
 Route::get('admin/posts/create',[PostController::class,'create'])->middleware('admin');
+Route::post('admin/posts',[PostController::class,'store'])->middleware('admin');
 
 // Route::get('categories/{category:slug}',function(Category $category){
 //     return view('posts',[
