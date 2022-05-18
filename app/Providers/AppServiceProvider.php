@@ -6,6 +6,7 @@ use App\Services\MailchimpNewsletter;
 use App\Services\Newsletter;
 use MailchimpMarketing\ApiClient;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -35,5 +36,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Model::unguard(); // Uklanja sva mass asignment ogranicenja
+
+        Blade::if('admin', function () {
+            return auth()->user()?->is_admin;
+        });
     }
 }
