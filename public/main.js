@@ -22,3 +22,29 @@ if (postTitle && postSLug) {
         postSLug.value = e.target.value.toLowerCase().replaceAll(' ','-');
     })
 }
+
+const createPost = async function() {
+    try {
+       const register = document.getElementById('register');
+       console.log();
+       register.addEventListener('submit',(e)=>{
+           e.preventDefault();
+           const dataArr = [...new FormData(e.currentTarget)];
+           const data = Object.fromEntries(dataArr);
+           const resp = await fetch('/admin/posts',{
+                method : 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                  },
+                body : JSON.stringify(data)
+           })
+           const dataApi = await resp.json();
+           console.log(dataApi);
+       })
+
+
+    } catch(err) {
+        console.log(err);
+    }
+}
+createPost()

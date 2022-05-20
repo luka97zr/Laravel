@@ -35,8 +35,11 @@
                     Subscribe for Updates
                 </a>
                 @admin
-                <a href="admin/posts/create"  id="subscribe-header" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
-                    Create new Post
+                    @if(request()->routeIs('home'))
+                        <a href="/admin/posts/create"  id="subscribe-header" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
+                            Create new post
+                        </a>
+                    @endif
                 </a>
                 @endadmin
             </div>
