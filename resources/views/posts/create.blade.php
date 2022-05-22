@@ -4,7 +4,7 @@
             Publish New Post
         </h1>
         <div class="max-w-sm mx-auto">
-            <form id="register" method="POST" enctype="multipart/form-data">
+            <form id="register" enctype="multipart/form-data">
                 @csrf
 
                 <x-form.input name='title' class="js-title"/>

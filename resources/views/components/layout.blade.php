@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="{{ URL::asset('style.css') }}" rel="stylesheet">
     <script defer src="{{ URL::asset('main.js') }}"></script>
+    <meta name="csrf" value="{{ csrf_token() }} ">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body style="font-family: Open Sans, sans-serif">

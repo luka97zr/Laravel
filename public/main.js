@@ -5,6 +5,7 @@ const subscribeBtn = document.getElementById('subscribe-header');
 const subscribeSection = document.getElementById('subscribe');
 const postTitle = document.querySelector('.js-title');
 const postSLug = document.querySelector('.js-slug');
+const register = document.getElementById('register');
 
 if(categoryBtn) {
     categoryBtn.addEventListener('click',()=>{
@@ -23,28 +24,26 @@ if (postTitle && postSLug) {
     })
 }
 
-const createPost = async function() {
+const createPost = async function(e) {
     try {
-       const register = document.getElementById('register');
-       console.log();
-       register.addEventListener('submit',(e)=>{
-           e.preventDefault();
-           const dataArr = [...new FormData(e.currentTarget)];
-           const data = Object.fromEntries(dataArr);
-           const resp = await fetch('/admin/posts',{
-                method : 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                  },
-                body : JSON.stringify(data)
-           })
-           const dataApi = await resp.json();
-           console.log(dataApi);
+        const dataArr = [...new FormData(e.currentTarget)];
+        const data = Object.fromEntries(dataArr);
+       const resp = await fetch('/admin/posts',{
+            method : 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-Token": e.currentTarget.querySelector('input[name=_token]').value
+              },
+            body : JSON.stringify(data)
        })
-
+       const dataApi = await resp.json();
+       console.log(dataApi)
 
     } catch(err) {
         console.log(err);
     }
 }
-createPost()
+register.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    createPost(e)
+})
